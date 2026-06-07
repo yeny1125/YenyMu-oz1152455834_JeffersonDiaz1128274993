@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "nombre": "crema corporal",
+        "descripcion": "crema con brillos",
+        "precio": 25000.0,
+        "cantidad": 15
+    }
+]
