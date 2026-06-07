@@ -94,6 +94,65 @@ class TestSpaCRUD(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.spa.eliminar_producto(999)
 
+        # Validar precio negativo
+    def test_precio_negativo(self):
+
+        producto = Producto(
+            2,
+            "Crema",
+            "Crema facial",
+            -1000,
+            10
+        )
+
+        with self.assertRaises(ValueError):
+            self.spa.crear_producto(producto)
+
+
+    # Validar cantidad negativa
+    def test_cantidad_negativa(self):
+
+        producto = Producto(
+            3,
+            "Jabon",
+            "Jabon exfoliante",
+            20000,
+            -5
+        )
+
+        with self.assertRaises(ValueError):
+            self.spa.crear_producto(producto)
+
+
+    # Actualizar nombre
+    def test_actualizar_nombre(self):
+
+        self.spa.crear_producto(
+            self.producto
+        )
+
+        self.spa.actualizar_producto(
+            1,
+            nombre="Aceite Premium"
+        )
+
+        productos = self.spa.obtener_productos()
+
+        self.assertEqual(
+            productos[0]["nombre"],
+            "Aceite Premium"
+        )
+
+
+    # Verificar creación del archivo
+    def test_creacion_archivo(self):
+
+        self.assertTrue(
+            os.path.exists(
+                self.archivo_prueba
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
